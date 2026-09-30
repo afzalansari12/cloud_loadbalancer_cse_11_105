@@ -1,0 +1,347 @@
+{
+  "timestamp": "2026-10-01 01:21:21",
+  "time_short": "01:21:21",
+  "is_running": true,
+  "is_paused": false,
+  "summary": {
+    "total_servers": 4,
+    "online_servers": 4,
+    "offline_servers": 0,
+    "overloaded_servers": 0,
+    "active_workloads": 5,
+    "queued_workloads": 0,
+    "completed_workloads": 708,
+    "avg_cpu_percent": 21.5,
+    "avg_ram_percent": 24.4,
+    "avg_net_percent": 7.5,
+    "total_power_w": 376.9,
+    "total_energy_kwh": 0.2161,
+    "energy_cost_currency": 1.73,
+    "energy_per_workload_kwh": 0.043224,
+    "total_migrations": 0,
+    "total_failures": 0
+  },
+  "voltage": 231.07,
+  "current": 1.63,
+  "power": 376.89,
+  "power_factor": 0.95,
+  "energy": 0.216,
+  "servers": [
+    {
+      "id": "Server-1",
+      "name": "US-East Compute 01",
+      "is_online": true,
+      "status": "Healthy",
+      "cpu_capacity": 8,
+      "allocated_cpu": 2.11,
+      "cpu_utilization": 26.4,
+      "ram_capacity": 16.0,
+      "allocated_ram": 5.68,
+      "ram_utilization": 35.5,
+      "net_capacity": 1000.0,
+      "allocated_net": 41.41,
+      "net_utilization": 4.1,
+      "active_workloads": 1,
+      "completed_workloads": 158,
+      "current_power_w": 82.3,
+      "total_energy_kwh": 0.0464
+    },
+    {
+      "id": "Server-2",
+      "name": "US-East Compute 02",
+      "is_online": true,
+      "status": "Healthy",
+      "cpu_capacity": 8,
+      "allocated_cpu": 2.15,
+      "cpu_utilization": 26.9,
+      "ram_capacity": 16.0,
+      "allocated_ram": 3.88,
+      "ram_utilization": 24.2,
+      "net_capacity": 1000.0,
+      "allocated_net": 227.86,
+      "net_utilization": 22.8,
+      "active_workloads": 2,
+      "completed_workloads": 160,
+      "current_power_w": 85.7,
+      "total_energy_kwh": 0.0456
+    },
+    {
+      "id": "Server-3",
+      "name": "US-West High-Perf 03",
+      "is_online": true,
+      "status": "Healthy",
+      "cpu_capacity": 16,
+      "allocated_cpu": 1.67,
+      "cpu_utilization": 10.4,
+      "ram_capacity": 32.0,
+      "allocated_ram": 5.33,
+      "ram_utilization": 16.7,
+      "net_capacity": 2000.0,
+      "allocated_net": 17.83,
+      "net_utilization": 0.9,
+      "active_workloads": 1,
+      "completed_workloads": 209,
+      "current_power_w": 108.02,
+      "total_energy_kwh": 0.0685
+    },
+    {
+      "id": "Server-4",
+      "name": "EU-Central General 04",
+      "is_online": true,
+      "status": "Healthy",
+      "cpu_capacity": 12,
+      "allocated_cpu": 2.66,
+      "cpu_utilization": 22.2,
+      "ram_capacity": 24.0,
+      "allocated_ram": 5.12,
+      "ram_utilization": 21.3,
+      "net_capacity": 1500.0,
+      "allocated_net": 33.99,
+      "net_utilization": 2.3,
+      "active_workloads": 1,
+      "completed_workloads": 181,
+      "current_power_w": 100.87,
+      "total_energy_kwh": 0.0555
+    }
+  ],
+  "queued_items": [],
+  "flow_table": [
+    {
+      "workload_id": "W1707",
+      "target_server": "Server-3",
+      "target_name": "US-West High-Perf 03",
+      "load_score": 0.2139,
+      "created_at": "01:20:59",
+      "status": "ACTIVE"
+    },
+    {
+      "workload_id": "W1710",
+      "target_server": "Server-4",
+      "target_name": "EU-Central General 04",
+      "load_score": 0.0301,
+      "created_at": "01:21:08",
+      "status": "ACTIVE"
+    },
+    {
+      "workload_id": "W1712",
+      "target_server": "Server-2",
+      "target_name": "US-East Compute 02",
+      "load_score": 0.0231,
+      "created_at": "01:21:14",
+      "status": "ACTIVE"
+    },
+    {
+      "workload_id": "W1713",
+      "target_server": "Server-1",
+      "target_name": "US-East Compute 01",
+      "load_score": 0.2045,
+      "created_at": "01:21:17",
+      "status": "ACTIVE"
+    },
+    {
+      "workload_id": "W1714",
+      "target_server": "Server-2",
+      "target_name": "US-East Compute 02",
+      "load_score": 0.2299,
+      "created_at": "01:21:20",
+      "status": "ACTIVE"
+    }
+  ],
+  "activity_log": [
+    {
+      "timestamp": "01:21:20",
+      "level": "SUCCESS",
+      "message": "Workload W1714 (Media Streaming) assigned -> Server-2 [Score: 0.230]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:19",
+      "level": "INFO",
+      "message": "Workload W1711 finished execution on Server-1.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:17",
+      "level": "SUCCESS",
+      "message": "Workload W1713 (Batch Processing) assigned -> Server-1 [Score: 0.204]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:14",
+      "level": "SUCCESS",
+      "message": "Workload W1712 (Web Request) assigned -> Server-2 [Score: 0.023]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:11",
+      "level": "SUCCESS",
+      "message": "Workload W1711 (Web Request) assigned -> Server-1 [Score: 0.023]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:10",
+      "level": "INFO",
+      "message": "Workload W1709 finished execution on Server-2.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:09",
+      "level": "INFO",
+      "message": "Workload W1706 finished execution on Server-1.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:08",
+      "level": "SUCCESS",
+      "message": "Workload W1710 (Batch Processing) assigned -> Server-4 [Score: 0.030]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:07",
+      "level": "INFO",
+      "message": "Workload W1708 finished execution on Server-4.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:06",
+      "level": "INFO",
+      "message": "Workload W1705 finished execution on Server-4.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:05",
+      "level": "SUCCESS",
+      "message": "Workload W1709 (Web Request) assigned -> Server-2 [Score: 0.023]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:04",
+      "level": "INFO",
+      "message": "Workload W1703 finished execution on Server-1.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:02",
+      "level": "INFO",
+      "message": "Workload W1701 finished execution on Server-2.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:21:02",
+      "level": "SUCCESS",
+      "message": "Workload W1708 (Web Request) assigned -> Server-4 [Score: 0.147]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:59",
+      "level": "INFO",
+      "message": "Workload W1702 finished execution on Server-4.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:59",
+      "level": "INFO",
+      "message": "Workload W1698 finished execution on Server-3.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:59",
+      "level": "SUCCESS",
+      "message": "Workload W1707 (Batch Processing) assigned -> Server-3 [Score: 0.214]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:57",
+      "level": "INFO",
+      "message": "Workload W1704 finished execution on Server-3.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:56",
+      "level": "SUCCESS",
+      "message": "Workload W1706 (Media Streaming) assigned -> Server-1 [Score: 0.256]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:53",
+      "level": "SUCCESS",
+      "message": "Workload W1705 (Web Request) assigned -> Server-4 [Score: 0.248]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:50",
+      "level": "INFO",
+      "message": "Workload W1700 finished execution on Server-1.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:50",
+      "level": "SUCCESS",
+      "message": "Workload W1704 (Database Query) assigned -> Server-3 [Score: 0.214]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:49",
+      "level": "INFO",
+      "message": "Workload W1695 finished execution on Server-4.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:47",
+      "level": "SUCCESS",
+      "message": "Workload W1703 (Batch Processing) assigned -> Server-1 [Score: 0.208]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:44",
+      "level": "SUCCESS",
+      "message": "Workload W1702 (Batch Processing) assigned -> Server-4 [Score: 0.252]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:41",
+      "level": "INFO",
+      "message": "Workload W1699 finished execution on Server-4.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:41",
+      "level": "SUCCESS",
+      "message": "Workload W1701 (Batch Processing) assigned -> Server-2 [Score: 0.021]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:38",
+      "level": "INFO",
+      "message": "Workload W1697 finished execution on Server-3.",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:38",
+      "level": "SUCCESS",
+      "message": "Workload W1700 (Batch Processing) assigned -> Server-1 [Score: 0.018]",
+      "details": {}
+    },
+    {
+      "timestamp": "01:20:37",
+      "level": "INFO",
+      "message": "Workload W1696 finished execution on Server-1.",
+      "details": {}
+    }
+  ],
+  "weights": {
+    "cpu": 0.4,
+    "ram": 0.25,
+    "net": 0.2,
+    "count": 0.1,
+    "energy": 0.05
+  },
+  "thresholds": {
+    "cpu_warning": 70.0,
+    "cpu_overload": 85.0,
+    "ram_warning": 70.0,
+    "ram_overload": 85.0,
+    "net_warning": 75.0,
+    "net_overload": 90.0
+  }
+}

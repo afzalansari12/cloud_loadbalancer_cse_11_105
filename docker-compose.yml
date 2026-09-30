@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  # ============================================================
+  # 1. SDN Cloud Dynamic Load Balancer Service
+  # ============================================================
+  sdn-loadbalancer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sdn-cloud-loadbalancer
+    ports:
+      - "8505:8501"   # Streamlit Bright SaaS Dashboard (Mapped to 8505 to avoid host port conflicts)
+      - "8000:8000"   # REST API & Prometheus Metrics Exporter (/metrics)
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - MQTT_ENABLED=true
+      - MQTT_BROKER=480b2e52602e45f7b1ea788c58a4bf0c.s1.eu.hivemq.cloud
+      - MQTT_PORT=8883
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - sdn-network
+
+  # ============================================================
+  # 2. Prometheus Metrics Time-Series Engine
+  # ============================================================
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: sdn-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=7d"
+      - "--web.enable-lifecycle"
+    restart: unless-stopped
+    networks:
+      - sdn-network
+
+  # ============================================================
+  # 3. Grafana Enterprise Cloud Observability
+  # ============================================================
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: sdn-grafana
+    ports:
+      - "3001:3000"   # Grafana UI (Mapped to 3001 to avoid Next.js on 3000)
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/sdn_monitoring.json
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - sdn-network
+
+networks:
+  sdn-network:
+    driver: bridge
