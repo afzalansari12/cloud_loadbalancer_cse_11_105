@@ -486,6 +486,7 @@ server_cols = st.columns(len(servers))
 
 for idx, s in enumerate(servers):
     with server_cols[idx]:
+        status_class = f"badge-{s['status'].lower()}"
         card_html = textwrap.dedent(f"""
         <div class="server-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
