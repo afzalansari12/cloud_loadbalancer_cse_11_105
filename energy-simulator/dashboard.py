@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+import textwrap
 import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
@@ -250,7 +251,24 @@ ml_data = load_ml_model()
 # SIDEBAR CONTROLS
 # ==========================================
 with st.sidebar:
-    st.image("https://img.icons8.com/color/96/server-configuration.png", width=64)
+    st.markdown(textwrap.dedent("""
+    <div style="text-align: center; margin-bottom: 8px;">
+        <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="8" width="52" height="14" rx="4" fill="#2563eb"/>
+            <circle cx="14" cy="15" r="2.5" fill="#ffffff"/>
+            <circle cx="21" cy="15" r="2.5" fill="#93c5fd"/>
+            <rect x="30" y="14" width="22" height="2" rx="1" fill="#bfdbfe"/>
+            <rect x="6" y="25" width="52" height="14" rx="4" fill="#0284c7"/>
+            <circle cx="14" cy="32" r="2.5" fill="#ffffff"/>
+            <circle cx="21" cy="32" r="2.5" fill="#7dd3fc"/>
+            <rect x="30" y="31" width="22" height="2" rx="1" fill="#bae6fd"/>
+            <rect x="6" y="42" width="52" height="14" rx="4" fill="#0f172a"/>
+            <circle cx="14" cy="49" r="2.5" fill="#22c55e"/>
+            <circle cx="21" cy="49" r="2.5" fill="#4ade80"/>
+            <rect x="30" y="48" width="22" height="2" rx="1" fill="#94a3b8"/>
+        </svg>
+    </div>
+    """), unsafe_allow_html=True)
     st.title("SDN Control Plane")
     st.caption("Dynamic Cloud Load Balancer Manager")
 
@@ -361,7 +379,7 @@ queued_items = snapshot.get("queued_items", [])
 # ==========================================
 # TOP HEADER BANNER
 # ==========================================
-st.markdown(f"""
+header_html = textwrap.dedent(f"""
 <div class="header-banner">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
@@ -378,7 +396,8 @@ st.markdown(f"""
         </div>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""").strip()
+st.markdown(header_html, unsafe_allow_html=True)
 
 # ==========================================
 # 1. OVERVIEW METRICS RIBBON (8 Cards)
@@ -386,76 +405,76 @@ st.markdown(f"""
 col1, col2, col3, col4, col5, col6, col7, col8 = st.columns(8)
 
 with col1:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Servers</div>
         <div class="metric-value">{summary['total_servers']}</div>
         <div class="metric-sub">{summary['online_servers']} Online • {summary['offline_servers']} Down</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 with col2:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Active Tasks</div>
         <div class="metric-value" style="color: #2563eb;">{summary['active_workloads']}</div>
         <div class="metric-sub">{summary['completed_workloads']} Completed</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 with col3:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Avg CPU</div>
         <div class="metric-value" style="color: {'#dc2626' if summary['avg_cpu_percent'] >= 85 else ('#d97706' if summary['avg_cpu_percent'] >= 70 else '#16a34a')};">{summary['avg_cpu_percent']}%</div>
         <div class="metric-sub">Threshold: 85% Over</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 with col4:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Avg RAM</div>
         <div class="metric-value" style="color: {'#dc2626' if summary['avg_ram_percent'] >= 85 else ('#d97706' if summary['avg_ram_percent'] >= 70 else '#0284c7')};">{summary['avg_ram_percent']}%</div>
         <div class="metric-sub">Fleet Memory Used</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 with col5:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Avg Network</div>
         <div class="metric-value">{summary['avg_net_percent']}%</div>
         <div class="metric-sub">SDN Port Utilization</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 with col6:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Total Power</div>
         <div class="metric-value" style="color: #4f46e5;">{summary['total_power_w']} W</div>
         <div class="metric-sub">{summary['total_energy_kwh']:.3f} kWh (₹{summary['energy_cost_currency']:.2f})</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 with col7:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Task Queue</div>
         <div class="metric-value" style="color: {'#dc2626' if summary['queued_workloads'] > 0 else '#64748b'};">{summary['queued_workloads']}</div>
         <div class="metric-sub">Admission Controlled</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 with col8:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="metric-card">
         <div class="metric-label">Overloaded</div>
         <div class="metric-value" style="color: {'#dc2626' if summary['overloaded_servers'] > 0 else '#16a34a'};">{summary['overloaded_servers']}</div>
         <div class="metric-sub">{summary['total_migrations']} Auto Migrated</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip(), unsafe_allow_html=True)
 
 st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 
@@ -467,8 +486,7 @@ server_cols = st.columns(len(servers))
 
 for idx, s in enumerate(servers):
     with server_cols[idx]:
-        status_class = f"badge-{s['status'].lower()}"
-        st.markdown(f"""
+        card_html = textwrap.dedent(f"""
         <div class="server-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <strong style="font-size: 1.05rem; color: #0f172a;">{s['id']}</strong>
@@ -511,7 +529,8 @@ for idx, s in enumerate(servers):
                 <div>Power: <strong>{s['current_power_w']} W</strong></div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """).strip()
+        st.markdown(card_html, unsafe_allow_html=True)
 
         # Failure / Recovery Interactive Control
         if s['is_online']:
